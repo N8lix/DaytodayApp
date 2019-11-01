@@ -38,48 +38,62 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //    onCreate(db);
     }
 
-//    public boolean insertData (String name, int point){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put(COL_1,name);
-//        contentValues.put(COL_2,point);
-//        contentValues.put(COL_3,0);
-//        long result = db.insert(TABLE_NAME, null,contentValues);
+    public boolean insertData (String name, int point){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1,name);
+        contentValues.put(COL_2,point);
+        contentValues.put(COL_3,0);
+        long result = db.insert(TABLE_NAME, null,contentValues);
+
+        if (result == -1) return false;
+        else return true;
+
+    }
 //
-//        if (result == -1) return false;
-//        else return true;
 //
-//    }
-//
-//
-//    public void eraserhead(){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        db.delete(TABLE_NAME, null, null);
+//   public void eraserhead(){
+ //       SQLiteDatabase db = this.getWritableDatabase();
+  //      db.delete(TABLE_NAME, null, null);
 //
 //    }
 
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * from "+ TABLE_NAME + " WHERE DONE != 0", null);
+        Cursor res = db.rawQuery("SELECT * from "+ TABLE_NAME + " WHERE DONE = 0 ", null);
+
         return res;
     }
-
-//    public void adddatabase(){
-//        insertData("Bagun Pagi",5);
-//        insertData("Get Dressed",5);
-//        insertData("Breakfast",5);
-//        insertData("Go to scool and write diary",5);
-//        insertData("Homework",5);
-//        insertData("Study",10);
-//        insertData("Dinner",5);
-//        insertData("Go to bed",10);
 //
-//
+//    public Cursor reset(){
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        Cursor res = db.rawQuery("UPDATE "+ TABLE_NAME + " SET DONE = \"ready \" WHERE DONE = null ", null);
+//        return res;
 //    }
 
-    public void done(String pos){
+    public void adddatabase(){
+        insertData("Bagun Pagi",5);
+        insertData("Get Dressed",5);
+        insertData("Breakfast",5);
+        insertData("Go to scool and write diary",5);
+        insertData("Homework",5);
+        insertData("Study",10);
+        insertData("Dinner",5);
+        insertData("Go to bed",10);
+
+
+    }
+
+    public void done(String pos, int point ){
+        int done = 1;
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("UPDATE "+TABLE_NAME+" SET DONE = 0 ",null);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_1,pos);
+        contentValues.put(COL_2,point);
+        contentValues.put(COL_3,done);
+        db.update(TABLE_NAME,contentValues,"NAME = ?", new String[]{pos});
+//        return true;
+
     }
 
 

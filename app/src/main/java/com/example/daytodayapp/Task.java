@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -25,6 +26,7 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
 
     private DatabaseHelper mydb;
     private int toggle =0;
+    private int score=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,10 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
         SharedPreferences mpref = getSharedPreferences("label",0);
         String mString = mpref.getString("tag","0");
 
+        SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+        int myIntValue = sp.getInt("your_int_key", -1);
+        score = myIntValue;
+        ((TextView)findViewById(R.id.my_number)).setText(String.valueOf(score));
 
 
 
@@ -67,28 +73,40 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
         while (res.moveToNext()) {
             buffer.append("1" + res.getString(0) + "\n");
             buffer.append("2" + res.getString(1) + "\n");
-            buffer.append("3" + res.getString(2) + "\n");;
-            itemsArrayList.add(new items(res.getString(0), res.getString(1), res.getString(2)));
+            buffer.append("3" + res.getString(2) + "\n");
+            buffer.append("3" + res.getString(3) + "\n");
+          //  itemsArrayList.add(new items(res.getString(0), res.getString(1), "Tap if to get points"));
+            itemsArrayList.add(new items(res.getString(0), res.getString(1), "Click to Complete"));
         }
 
         // Show
 
     }
 
-    void showscore(){
+//    void resetscore(View view){
+//        Cursor res = mydb.reset();
+//
+//    }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        start();
     }
 
     @Override
     public void onItemClick(int position) {
         String name = itemsArrayList.get(position).getName();
-        int score = Integer.parseInt(itemsArrayList.get(position).getPoint());
+        score += Integer.parseInt(itemsArrayList.get(position).getPoint());
         showMessage(name,"text");
-        mydb.done(name);
-        SharedPreferences mpref = getSharedPreferences("label",0);
-        String mString = mpref.getString("tag","0");
-        SharedPreferences.Editor mEditor = mpref.edit();
-        mEditor.putString("tag", String.valueOf(score));
+        mydb.done(name,Integer.parseInt(itemsArrayList.get(position).getPoint()));
+        ((TextView)findViewById(R.id.my_number)).setText(String.valueOf(score));
+
+        SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("your_int_key", score);
+        editor.commit();
 
         itemsArrayList.remove(position);
         start();
@@ -100,20 +118,21 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
 //    }
 
 
-//    public void Allmi(View view) {
-//        mydb.adddatabase();
-//        Cursor res = mydb.getAllData();
-//        StringBuffer buffer = new StringBuffer();
-//        while (res.moveToNext()) {
-//            buffer.append("1" + res.getString(0) + "\n");
-//            buffer.append("2" + res.getString(1) + "\n");
-//            buffer.append("3" + res.getString(2) + "\n");
-//            buffer.append("4" + res.getString(3) + "\n\n");
-//        }
-//
-//        // Show all data
-//        showMessage("Data", buffer.toString());
-//    }
+    public void Allmi(View view) {
+         mydb.adddatabase();
+        Cursor res = mydb.getAllData();
+        StringBuffer buffer = new StringBuffer();
+        while (res.moveToNext()) {
+            buffer.append("1" + res.getString(0) + "\n");
+            buffer.append("2" + res.getString(1) + "\n");
+            buffer.append("3" + res.getString(2) + "\n");
+            buffer.append("4" + res.getString(3) + "\n\n");
+        }
+
+        // Show all data
+        start();
+        showMessage("Data", buffer.toString());
+    }
 
     public void showMessage(String title, String Message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -121,6 +140,11 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
         builder.setTitle(title);
         builder.setMessage(Message);
         builder.show();
+    }
+
+    public void clicknext(View v){
+        Intent intent = new Intent (this, Spendpoints.class);
+        startActivity(intent);
     }
 
 }
