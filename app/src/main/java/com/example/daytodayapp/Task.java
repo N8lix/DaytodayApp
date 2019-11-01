@@ -21,8 +21,11 @@ import java.util.ArrayList;
 
 public class Task extends AppCompatActivity implements MyAdapter.OnItemListener {
     private RecyclerView recyclerView;
+    private RecyclerView recyclerView2;
     private RecyclerView.Adapter mAdapter;
+    private RecyclerView.Adapter mAdapter2;
     private ArrayList<items> itemsArrayList;
+    private ArrayList<items> itemsArrayList2;
 
     private DatabaseHelper mydb;
     private int toggle =0;
@@ -63,6 +66,14 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
         recyclerView.setAdapter(mAdapter);
         Log.d("masuk","start");
 
+        recyclerView2 = (RecyclerView) findViewById(R.id.my_item2);
+        mAdapter2 = new MyAdapter(itemsArrayList2 , this);
+        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(Task.this);
+        recyclerView2.setLayoutManager(layoutManager2);
+        recyclerView2.setAdapter(mAdapter2);
+        Log.d("masuk","start");
+
+
     }
 
     void showtask() {
@@ -77,6 +88,7 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
             buffer.append("3" + res.getString(3) + "\n");
           //  itemsArrayList.add(new items(res.getString(0), res.getString(1), "Tap if to get points"));
             itemsArrayList.add(new items(res.getString(0), res.getString(1), "Click to Complete"));
+            itemsArrayList2.add(new items(res.getString(0), res.getString(1), "Click to Complete"));
         }
 
         // Show
