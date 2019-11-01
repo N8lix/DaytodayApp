@@ -36,7 +36,7 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
         mydb = new DatabaseHelper(this);
-
+        mydb.adddatabase();
         SharedPreferences mpref = getSharedPreferences("label",0);
         String mString = mpref.getString("tag","0");
 
@@ -82,10 +82,10 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
         Cursor res = mydb.getAllData();
         StringBuffer buffer = new StringBuffer();
         while (res.moveToNext()) {
-            buffer.append("1" + res.getString(0) + "\n");
-            buffer.append("2" + res.getString(1) + "\n");
-            buffer.append("3" + res.getString(2) + "\n");
-            buffer.append("3" + res.getString(3) + "\n");
+            buffer.append("2" + res.getString(0) + "\n");
+            buffer.append("3" + res.getString(1) + "\n");
+            buffer.append("4" + res.getString(2) + "\n");
+            buffer.append("5" + res.getString(3) + "\n");
           //  itemsArrayList.add(new items(res.getString(0), res.getString(1), "Tap if to get points"));
             itemsArrayList.add(new items(res.getString(0), res.getString(1), "Click to Complete"));
             itemsArrayList2.add(new items(res.getString(0), res.getString(1), "Click to Complete"));

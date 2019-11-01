@@ -38,7 +38,7 @@
             android:layout_marginTop="8dp"
             android:layout_alignParentLeft="true"
             android:layout_width="184dp"
-            android:layout_height="560dp"
+            android:layout_height="420dp"
             android:id="@+id/my_item">
 
         </androidx.recyclerview.widget.RecyclerView>
@@ -48,7 +48,7 @@
             android:layout_marginTop="8dp"
             android:layout_alignParentRight="true"
             android:layout_width="184dp"
-            android:layout_height="560dp"
+            android:layout_height="420dp"
             android:id="@+id/my_item2">
 
         </androidx.recyclerview.widget.RecyclerView>

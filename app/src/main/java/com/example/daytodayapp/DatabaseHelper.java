@@ -3,6 +3,7 @@ package com.example.daytodayapp;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -78,6 +79,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL_6,sqlDate.toString());
         long result = db.insert(TABLE_NAME, null,contentValues);
 
+
+
         if (result == -1) return false;
         else return true;
 
@@ -92,8 +95,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getAllData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * from "+ TABLE_NAME + " WHERE DONE = 0 ", null);
-
+        Cursor res = db.rawQuery("SELECT * from "+ TABLE_NAME +" WHERE DONE=0 ", null);
+        Log.d("masuk  ", "getAllData:  "+DatabaseUtils.dumpCursorToString(res));
+        //Log.d("error", DatabaseUtils.dumpCursorToString(res));
         return res;
     }
 //
@@ -118,6 +122,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertData("Dinner",5,"TASK", x);
         insertData("Go to bed",10,"TASK", x);
         x++;}
+
+        Log.d("masuk","adddatabase");
 
 
 
