@@ -32,8 +32,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(MyAdapter.MyViewHolder holder, int position) {
         holder.txtName.setText(dataList.get(position).getName());
-        holder.txtPoint.setText(dataList.get(position).getPoint());
+        holder.txtPoint.setText(String.valueOf(dataList.get(position).getPoint()));
         holder.txtDone.setText(dataList.get(position).getDone());
+        holder.whose = dataList.get(position).getWhose();
     }
 
 
@@ -45,6 +46,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView txtName, txtPoint , txtDone;
+        private int whose;
         OnItemListener onItemListener;
 
 //        private boolean txtDone;
@@ -55,6 +57,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             txtName = (TextView) itemView.findViewById(R.id.item_name);
             txtPoint = (TextView) itemView.findViewById(R.id.item_points);
             txtDone = (TextView) itemView.findViewById(R.id.item_done);
+            this.whose = whose;
             this.onItemListener = onItemListener;
             itemView.setOnClickListener(this);
         }
@@ -62,12 +65,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         @Override
         public void onClick(View v) {
-            onItemListener.onItemClick(getAdapterPosition());
+            String name = this.txtName.getText().toString() ;
+            int whose = this.whose;
+            onItemListener.onItemClick(name, whose, getAdapterPosition());
         }
     }
 
     public interface OnItemListener{
-        void onItemClick (int position);
+
+        void onItemClick (String name, int whose, int position);
     }
 
 

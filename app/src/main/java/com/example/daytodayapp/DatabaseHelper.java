@@ -85,18 +85,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else return true;
 
     }
-//
-//
-//   public void eraserhead(){
- //       SQLiteDatabase db = this.getWritableDatabase();
-  //      db.delete(TABLE_NAME, null, null);
-//
-//    }
+
+
+   public void eraserhead(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, null, null);
+
+    }
 
     public Cursor getAllData(){
+
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * from "+ TABLE_NAME +" WHERE DONE=0 ", null);
-        Log.d("masuk  ", "getAllData:  "+DatabaseUtils.dumpCursorToString(res));
+        String query = "SELECT * from "+ TABLE_NAME +" WHERE "+COL_4+" = 0 ";
+        Cursor res = db.rawQuery(query , null);
+
+        Log.d("masuk", "masyj getAlldata");
+
+        if (res.moveToFirst()) {
+            Log.d("masuk  ", "getAllData:  "+DatabaseUtils.dumpCursorToString(res));
+        }
+
         //Log.d("error", DatabaseUtils.dumpCursorToString(res));
         return res;
     }
@@ -111,6 +119,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     public void adddatabase(){
+
+
         int x =0;
         while(x<3){
         insertData("Bagun Pagi",5,"TASK", x);
@@ -134,9 +144,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int done = 1;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL_1,pos);
-        contentValues.put(COL_2,point);
-        contentValues.put(COL_3,done);
+        contentValues.put(COL_2,pos);
+        contentValues.put(COL_3,point);
+        contentValues.put(COL_4,done);
         db.update(TABLE_NAME,contentValues,"NAME = ?", new String[]{pos});
 //        return true;
 

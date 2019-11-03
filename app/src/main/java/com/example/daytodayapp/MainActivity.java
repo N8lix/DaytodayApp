@@ -24,19 +24,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void LoginApp(View view) {
-        EditText user = (EditText)findViewById(R.id.IdEdit);
-        String username = user.getText().toString();
-        EditText pass = findViewById(R.id.PasswordEdit);
-        String password = pass.getText().toString();
+//        EditText user = (EditText)findViewById(R.id.IdEdit);
+//        String username = user.getText().toString();
+//        EditText pass = findViewById(R.id.PasswordEdit);
+//        String password = pass.getText().toString();
+//
+//        if(username.equals("admin") && password.equals("admin")) {
+//            Intent intent = new Intent (this, Task.class);
+//       //     intent.putExtra(mydb);
+//                startActivity(intent);
+//        }else{
+//            ((TextView)findViewById(R.id.button1)).setText("wrong id / password");
+//            ((TextView)findViewById(R.id.button1)).setTextColor(Color.RED);
+//        }
+        Intent intent = new Intent (this, Task.class);
+        startActivity(intent);
 
-        if(username.equals("admin") && password.equals("admin")) {
-            Intent intent = new Intent (this, Task.class);
-       //     intent.putExtra(mydb);
-                startActivity(intent);
-        }else{
-            ((TextView)findViewById(R.id.button1)).setText("wrong id / password");
-            ((TextView)findViewById(R.id.button1)).setTextColor(Color.RED);
-        }
     }
 
 
