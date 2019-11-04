@@ -1,92 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Task"
+    android:layout_margin="8dp"
     android:orientation="vertical"
-    android:layout_margin="16dp">
+    tools:context=".Task">
 
 
         <View
+            android:id="@+id/view"
             android:layout_width="3dp"
-            android:layout_height="580dp"
-            android:layout_centerInParent="true"
+            android:layout_height="480dp"
+            android:layout_centerInParent="false"
             android:layout_centerHorizontal="true"
-            android:background="#000000" />
-
-
+            android:background="#000000"
+            app:layout_constraintEnd_toStartOf="@+id/spend2"
+            app:layout_constraintStart_toEndOf="@+id/testerscreen2"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <Button
-                    android:layout_width="184dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/testerscreen2"
-                    android:onClick="clicknext"
-                    android:text="SPEND 1"/>
-         <Button
-                    android:layout_width="184dp"
-                    android:layout_height="wrap_content"
-                    android:onClick="clicknext2"
-                    android:layout_alignParentEnd="true"
-                    android:text="SPEND 2"/>
+            android:id="@+id/testerscreen2"
+            android:layout_width="170dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:onClick="clicknext"
+            android:text="@string/button_spend1"
+            app:layout_constraintBottom_toTopOf="@+id/my_item"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/spend2"
+            android:layout_width="170dp"
+            android:layout_height="48dp"
+            android:layout_alignParentEnd="true"
+            android:onClick="clicknext2"
+            android:text="@string/Button_spend2"
+            app:layout_constraintBottom_toTopOf="@+id/my_item2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_item"
+            android:layout_width="170dp"
+            android:layout_height="380dp"
             android:layout_below="@+id/testerscreen2"
-            android:layout_marginTop="8dp"
-            android:layout_alignParentLeft="true"
-            android:layout_width="184dp"
-            android:layout_height="420dp"
-            android:id="@+id/my_item">
+            android:layout_alignParentStart="true"
+            app:layout_constraintBottom_toTopOf="@+id/my_number2"
+            app:layout_constraintEnd_toStartOf="@+id/view"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/testerscreen2">
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_item2"
+            android:layout_width="170dp"
+            android:layout_height="380dp"
             android:layout_below="@+id/testerscreen2"
-            android:layout_marginTop="8dp"
-            android:layout_alignParentRight="true"
-            android:layout_width="184dp"
-            android:layout_height="420dp"
-            android:id="@+id/my_item2">
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/my_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/spend2">
 
         </androidx.recyclerview.widget.RecyclerView>
-
-
-
 
         <TextView
-                   android:layout_below="@+id/my_number2"
-                    android:layout_marginTop="8dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-condensed"
-                    android:layout_gravity="center"
-                    android:textSize="24sp"
             android:id="@+id/mydate"
-                    android:text="DATE"/>
-        <TextView
-                    android:layout_below="@+id/my_item"
-                    android:layout_marginTop="8dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-condensed"
-                    android:layout_gravity="center"
-                    android:textSize="24sp"
-                    android:text="0"
-                    android:id="@+id/my_number"/>
-        <TextView
-            android:layout_below="@+id/my_item2"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
+            android:layout_below="@+id/my_number2"
             android:layout_gravity="center"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/Text_date"
             android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/my_number2" />
+
+        <TextView
+            android:id="@+id/my_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_item"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/Text_left"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/my_item2" />
+
+        <TextView
+            android:id="@+id/my_number2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/my_item2"
             android:layout_alignParentEnd="true"
-            android:text="0"
-            android:id="@+id/my_number2"/>
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-condensed"
+            android:text="@string/Text_right"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/my_item" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

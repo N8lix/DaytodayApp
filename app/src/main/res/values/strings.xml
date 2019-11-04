@@ -2,4 +2,9 @@
     <string name="app_name">DaytodayApp</string>
     <string name="inputid">EnterId</string>
     <string name="password">password</string>
+    <string name="button_spend1">SPEND 1</string>
+    <string name="Button_spend2">SPEND 2</string>
+    <string name="Text_right">0</string>
+    <string name="Text_left">0</string>
+    <string name="Text_date">DATE</string>
 </resources>

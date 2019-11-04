@@ -113,7 +113,7 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
             itemsArrayList2.add(new items(res.getString(1), res.getInt(2), "Click to Complete", res.getInt(4)));
             }
 
-            Log.d("masuk","showtask");
+
         }
 
         // Show
@@ -132,23 +132,36 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
 //        start();
 //    }
     int x = 0;
+    String name = "hi";
+    String name2 = "heo";
+    int who = 0;
     public void onItemClick(String namez, int whose, int position) {
         SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        String name = "hi";
-        String name2 = "heo";
-        if(itemsArrayList.size() > 0){
-             name = itemsArrayList.get(position).getName();}
-        if(itemsArrayList2.size() > 0){
-            name2 = itemsArrayList.get(position).getName();}
 
-        int who = itemsArrayList.get(position).getWhose();
+//        Log.d("masuk  this iteration:", x+ "   "+who+"   "+whose+"   "+name+"   "+name2+"   "+namez );
+
+
+
+
+
+        if(itemsArrayList.size() > position){
+             name = itemsArrayList.get(position).getName();
+             who = itemsArrayList.get(position).getWhose();
+
+        }else if(itemsArrayList2.size() > position){
+            name2 = itemsArrayList2.get(position).getName();
+
+            }
+
 
         x++;
 
-        Log.d("masuk rusak ", x+ "   "+who+"   "+whose );
+
+
 
         if( name.equals(namez) && who == whose){
+
             score += (itemsArrayList.get(position).getPoint());
 //          showMessage(name, "Good work!");
             mydb.done(name,(itemsArrayList.get(position).getPoint()));
@@ -157,9 +170,9 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
             editor.putInt("your_int_key", score);
             editor.commit();
 
-
         }else{
             score2 += (itemsArrayList2.get(position).getPoint());
+
 //           showMessage(name2, "Good work!");
             mydb.done(name2,(itemsArrayList2.get(position).getPoint()));
             ((TextView)findViewById(R.id.my_number2)).setText(String.valueOf(score2));
@@ -181,6 +194,7 @@ public class Task extends AppCompatActivity implements MyAdapter.OnItemListener 
 
 
         start();
+
     }
 
 
